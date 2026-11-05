@@ -23,5 +23,11 @@ for (int i =qtd - 1; i>= 0; i--) {
 }
 printf("\n");
 
+
+//Mudança de posição dentro dos valores binários de 8 bits
+unsigned char valor = 3;
+    valor = valor << 5;
+    printf("Resultado: %d\n", valor);
+
 return 0;
 }
