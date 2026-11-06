@@ -81,5 +81,47 @@ bool processar_venda(Produto *prod, int quantidade) {
     return true;
 }
 
+    //3. RELATÓRIO GERENCIAL (TRANSFORMA DADOS BRUTOS EM INFORMAÇÃO)
 
+    void gerar_relatorio_gerencial(const Produto *prod) {
+        printf("================ RELATÓRIO GERENCIAL (INFORMAÇÃO) ================");
+        // %s = texto | %d = inteiro | %2.f = decimal com 2 casas
+        printf("Produto: %s (ID: %d) | Preço: R$ %2.f | Estoque Atual: %d un.\n",
+        prod->nome, prod->id, prod->preco_unitario, prod->estoque);
+        
+        printf("--------------------------------------------------------------------------\n");
+        printf("| Venda | Prod | Qtd | Total (R$) | Status    | Motivo                   |\n");
+        printf("|-------|------|-----|------------|-----------|--------------------------|\n");
+
+        double faturamento = 0.0;
+        int vendas_aprovadas = 0;
+
+        //Percorre tods as transações gravadas no vetor 'histórico'
+        for (int i = 0; i < total_registros; i++)
+        {
+            RegistroVenda v = historico[i];
+
+            //Como 'v' é a ficha direta (e não um ponteiro), acessamos os campos com PONTO (.)
+            //Trecho (v.aprovada ? é um if/else curto)
+            printf("|  %03d  | %03d  | %02d  | %10.2f | %-9s | %-24s |\n",
+               v.id_venda,
+               v.id_produto,
+               v.qtd_solicitada,
+               v.valor_total,
+               v.aprovada ? "APROVADA" : "RECUSADA",
+               v.motivo);
+
+               //Soma ao faturamento apenas as vendas que foram aprovadas
+               if (v.aprovada) {
+                faturamento += v.valor_total;
+                vendas_aprovadas++;
+               }
+            }
+
+            printf("--------------------------------------------------------------------------\n");
+            printf("Faturamento Total: R$ %.2f | Taxa de Aprovacao: %d de %d tentativas\n\n",
+           faturamento, vendas_aprovadas, total_registros);
+    }
+
+    //4. PERSISTÊNCIA EM ARQUIVO (GRAVA OS DADOS DA RAM PARA O DISCO)
 
