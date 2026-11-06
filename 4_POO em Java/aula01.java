@@ -52,5 +52,44 @@ public class aula01 {
         // Como ambos são int, o Java joga fora a parte fracionária: 7 / 2 vira 3
         double divisaoTruncada = valorA / valorB;
         System.out.println("7 / 2 com variáveis inteiras: " + divisaoTruncada);
+
+        // Com double, o Java é forçado a calcular com virgula
+        double divisaoCorreta = (double) valorA / valorB;
+        System.out.println("7 / 2 convertendo para double: " + divisaoCorreta);
+        System.out.println();
+
+        System.out.println("=== 3. CHAMANDO OS MÉTODOS QUE CRIAMOS ===");
+        // Chamando o método somar e guardando a resposta
+        int somaResultado = somar(10, 7);
+        System.out.println("Resultado de somar(10, 7): " + somaResultado);
+
+        //Testando a função que devolve verdadeiro ou falso
+        int numeroParaTestar = 11;
+        boolean par = verificar_se_e_par(numeroParaTestar);
+        System.out.println("O número " + numeroParaTestar + " é par? " + par);
+
+        // Testando o método de decisão
+        System.out.print("Classificação para 17 anos: ");
+        classificarIdade(17);
+        System.out.println();
+
+        
+        System.out.println("=== 4. LAÇOS DE REPETIÇÃO (FOR E WHILE) ===");
+
+        //FOR: usado quando você sabe quantas vezes quer repetir
+        System.out.println("Contagem com laço FOR:");
+        for (int i = 1; i <= 7; i++) {
+                System.out.println(" Passo " + i);
+        }
+
+        //WHILE: repete enquanto a condição for verdadeira
+        System.out.println("Contagem regressiva com laço WHILE:");
+        int contador = 3;
+        while (contador >= 3) {
+                System.out.println(" Contagem: " + contador);
+                contador--;
+        }
+
+        System.out.println("Fim do programa!");
         }
 }
